@@ -13,7 +13,7 @@ insert_data(encoded_string) - takes in the json variable ,
                               
                               
 Api routing in postman:
-1. You can run and open it in browser to see get_data executed
-2. U can copy the output from above and paste thisbehind the absolute path in this format ("/<output>) and alternatively, 
+1. ("GET" REQUEST) You can run and open it in browser to see get_data executed
+2. ("PUT" REQUEST) You can copy the output from above and paste thisbehind the absolute path in this format ("/<output>) and alternatively, 
   u can use the following link :
   http://127.0.0.1:5000/["l", 39, "u", 37, "x", 35, "P", 33, "M", 31, "s", 29, "o", 27, "f", 25, "t"]
