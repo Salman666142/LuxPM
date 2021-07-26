@@ -9,7 +9,8 @@ get_data() -  to create the 20 odd numbers ,
 insert_data(encoded_string) - takes in the json variable ,
                               converts in StringIO and load into json, 
                               these values will be used for the value part of the command execution and together with the insert command , 
-                              the program will get executed and the variables will be saved into database
+                              the program will get executed and the variables will be saved into database and replies with "incertation success" message,
+                              If no parameter feeded or false parameter feeded, it will display "Internal en error occured" message.
                               
                               
 Api routing in postman:
