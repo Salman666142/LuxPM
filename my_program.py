@@ -4,7 +4,6 @@ import mysql as mysql
 from mysql import connector
 from flask import Flask
 
-
 app = Flask(__name__)
 
 
@@ -33,28 +32,37 @@ def get_data():
     return my_json_string
 
 
-@app.route('/<encoded_string>', methods=["PUT"])
+@app.route('/insert/<encoded_string>', methods=["PUT"])
 def inserting_data(encoded_string):
+    result = "Insertion Success"
+    if len(encoded_string) == 0:
+        raise Exception("No value inserted")
+    try:
+        my_string = StringIO(encoded_string)
+        insert_values = tuple(json.load(my_string))
 
-    my_string = StringIO(encoded_string)
-    insert_values = tuple(json.load(my_string))
+        my_db = mysql.connector.connect(user='SalmanFaris', password='S9634765J',
+                                        host='127.0.0.1',
+                                        database='Faris')
 
-    my_db = mysql.connector.connect(user='SalmanFaris', password='S9634765J',
-                                    host='127.0.0.1',
-                                    database='Faris')
+        cursor = my_db.cursor()
 
-    cursor = my_db.cursor()
+        insert_query = "insert into Faris.results (starting_value , second_value , third_value , fourth_value , " \
+                       "fifth_value ,sixth_value , seventh_value ,eighth_value , ninth_value, tenth_value , " \
+                       "eleventh_value , twelfth_value , thirteenth_value ,fourteenth_value ,fifteenth_value , " \
+                       "sixteenth_value ,seventeenth_value) Values (%s, %s,%s, %s,%s, %s,%s, " \
+                       "%s,%s, %s,%s, %s,%s, %s,%s, %s,%s)"
 
-    insert_query = "insert into Faris.results (starting_value , second_value , third_value , fourth_value , " \
-                   "fifth_value ,sixth_value , seventh_value ,eighth_value , ninth_value, tenth_value , " \
-                   "eleventh_value , twelfth_value , thirteenth_value ,fourteenth_value ,fifteenth_value , " \
-                   "sixteenth_value ,seventeenth_value) Values (%s, %s,%s, %s,%s, %s,%s, " \
-                   "%s,%s, %s,%s, %s,%s, %s,%s, %s,%s)"
+        cursor.execute(insert_query, insert_values)
+        my_db.commit()
+        # result = "Row added"
+        my_db.close()
+    except Exception as e:
+        if e is "No value Inserted":
+            result = "No value inserted"
+        else:
+            result = "Internal error occurred."
 
-    cursor.execute(insert_query, insert_values)
-    my_db.commit()
-    result = "Row added"
-    my_db.close()
     return result
 
 
