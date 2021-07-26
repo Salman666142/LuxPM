@@ -35,11 +35,9 @@ def get_data():
 
 @app.route('/<encoded_string>', methods=["PUT"])
 def inserting_data(encoded_string):
-    if str(isinstance(encoded_string, list)) == "True":
-        insert_values = tuple(encoded_string)
-    else:
-        my_string = StringIO(encoded_string)
-        insert_values = tuple(json.load(my_string))
+
+    my_string = StringIO(encoded_string)
+    insert_values = tuple(json.load(my_string))
 
     my_db = mysql.connector.connect(user='SalmanFaris', password='S9634765J',
                                     host='127.0.0.1',
