@@ -1,4 +1,3 @@
-Hello sir, this is my program for the given assignment.
 
 Functions :
 get_data() -  to create the 20 odd numbers , 
